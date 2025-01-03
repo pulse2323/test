@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecliptic AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard-green.css">
+    <link rel="icon" type="image/png" href="/neuryx.tech/assets/icon.png">
+    <link rel="stylesheet" href="hero-enhanced.css">
+    <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="sections.css">
+    <link rel="stylesheet" href="markets.css">
+    <link rel="stylesheet" href="analytics.css">
+    <link rel="stylesheet" href="preloader.css">
+    <script src="terminal.js"></script>
+    <script src="preloader.js"></script>
+    <script src="markets.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <script src="initWalletAnalyzer.js" type="module"></script>
+    <script type="module">
+        import WalletTracker from './walletTracker.js'; 
+        import WalletAnalyzer from './walletAnalyzer.js'; 
+        document.addEventListener('DOMContentLoaded', async () => { 
+            const walletTracker = new WalletTracker(); 
+            const marketsContainer = document.querySelector('.markets-container');
+            try { 
+                const topPairs = await walletTracker.findProfitableTraders(); 
+                const marketsHTML = topPairs.map(pair => {
+                    const marketCard = document.createElement('div');
+                    marketCard.className = 'market-card';
+                    marketCard.innerHTML = `
+                        <div class="market-header">
+                            <div class="market-title">
+                                <h3>${pair.tokenSymbol}</h3>
+                                <span class="market-name">${pair.tokenName}</span>
+                            </div>
+                            <div class="market-price">
+                                <div class="current-price">$${parseFloat(pair.priceUsd).toFixed(6)}</div>
+                                <div class="price-change ${pair.priceChange24h >= 0 ? 'positive' : 'negative'}">
+                                    ${pair.priceChange24h > 0 ? '+' : ''}${pair.priceChange24h.toFixed(2)}%
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return marketCard;
+                });
+                marketsContainer.append(...marketsHTML);
+            } catch (error) { 
+                console.error('Error loading markets:', error); 
+                marketsContainer.innerHTML = '<div class="error">Error loading market data</div>'; 
+            } 
+        });
+    </script>
+    
+</head>
+
+<body>
+    <!-- Add this at the start of your body tag -->
+    <div class="preloader">
+        <video class="preloader-video" autoplay muted loop playsinline>
+            <source src="assets/preloader.mp4" type="video/mp4">
+        </video>
+        <div class="preloader-content">
+            <div class="hud-text">
+                <div class="glitch-text">ECLIPTIC.AI</div>
+                <div class="loading-status">INITIALIZING ECLIPTIC CORE</div>
+                <div class="loading-progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <button class="enter-button">
+                <span class="button-text">ENTER SYSTEM</span>
+                <div class="button-glitch"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- ECLIPTIC Particle Effect -->
+    <div class="ECLIPTIC-particles"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="hero-content">
+                <h1>ECLIPTIC AI</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#analytics">Analytics</a>
+                <a href="#ECLIPTIC">ECLIPTIC Core</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="https://x.com/Eclipt0xAI" target="_blank" rel="noopener noreferrer" class="connect-ECLIPTIC">
+                    <span class="button-text">Follow ECLIPTIC</span>
+                    <div class="button-glitch"></div>
+                    <svg class="external-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-width="2"/>
+                        <path d="M15 3h6v6" stroke-width="2"/>
+                        <path d="M10 14L21 3" stroke-width="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>ECLIPTIC AI</h1>
+            <p class="hero-subtitle">ECLIPTIC Chain Intelligence</p>
+            <div class="hero-description">
+                Harness the power of quantum ECLIPTIC networks for advanced blockchain analysis and pattern recognition
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value">100K+</span>
+                    <span class="stat-label">Patterns Analyzed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">50ms</span>
+                    <span class="stat-label">ECLIPTIC Speed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">99.9%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#analytics" class="primary-button">
+                    <span class="button-text">Wallet Analyzer</span>
+                    <div class="button-glitch"></div>
+                </a>
+                <a href="#market-tracking" class="secondary-button">
+                    <span class="button-text">Coin Analyzer</span>
+                    <div class="button-glitch"></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-terminal">
+            <div class="terminal-header">
+                <div class="terminal-button"></div>
+                <div class="terminal-button"></div>
+                <div class="terminal-button"></div>
+                <span class="terminal-title">ECLIPTIC.AI - ECLIPTIC Core</span>
+            </div>
+            <div class="terminal-content">
+                <!-- Terminal lines will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ECLIPTIC Analytics Section -->
+    <section id="analytics" class="analytics-section">
+        <div class="section-header">
+            <h2>ECLIPTIC Analytics</h2>
+            <p>Advanced wallet analysis powered by quantum processing</p>
+        </div>
+
+        <div class="analytics-container">
+            <div class="wallet-analyzer">
+                <div class="input-container">
+                    <input type="text" id="walletInput" placeholder="Enter Solana wallet address or Solscan URL" class="wallet-input">
+                    <button id="analyzeButton" class="analyze-button">
+                        Analyze Wallet
+                    </button>
+                </div>
+                <div id="walletAnalytics" class="wallet-results">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Tracking Section -->
+    <section id="market-tracking" class="market-tracking-section">
+        <div class="section-header">
+            <h2>ECLIPTIC Market Tracking</h2>
+            <p>Real-time quantum analysis of top digital assets</p>
+        </div>
+        <div class="markets-container">
+            <!-- Market cards will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- ECLIPTIC Features -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <h2>ECLIPTIC Features</h2>
+            <p>Advanced ECLIPTIC systems for comprehensive chain analysis</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>ECLIPTIC Processing</h3>
+                <p>Advanced pattern recognition powered by quantum computing</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Market Analysis</h3>
+                <p>Real-time market intelligence with predictive signals</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                        <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Quantum Speed</h3>
+                <p>Lightning-fast analysis across multiple chains</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECLIPTIC Core -->
+    <section id="ECLIPTIC" class="ECLIPTIC-section">
+        <div class="section-header">
+            <h2>ECLIPTIC Core</h2>
+            <p>Advanced blockchain intelligence powered by quantum computing</p>
+        </div>
+        <div class="ECLIPTIC-grid">
+            <div class="ECLIPTIC-card">
+                <h3>Pattern Recognition</h3>
+                <ul class="ECLIPTIC-features">
+                    <li>Advanced market pattern detection</li>
+                    <li>Real-time anomaly identification</li>
+                    <li>Predictive trend analysis</li>
+                </ul>
+            </div>
+            <div class="ECLIPTIC-card">
+                <h3>Quantum Analysis</h3>
+                <ul class="ECLIPTIC-features">
+                    <li>Multi-chain data processing</li>
+                    <li>ECLIPTIC network optimization</li>
+                    <li>Advanced risk metrics</li>
+                </ul>
+            </div>
+            <div class="ECLIPTIC-card">
+                <h3>Market Intelligence</h3>
+                <ul class="ECLIPTIC-features">
+                    <li>Whale wallet tracking</li>
+                    <li>Smart money analysis</li>
+                    <li>Volume pattern detection</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="roadmap-section">
+        <div class="section-header">
+            <h2>ECLIPTIC Evolution</h2>
+            <p>Our path to advanced quantum intelligence</p>
+        </div>
+        <div class="roadmap-container">
+            <div class="roadmap-item">
+                <div class="roadmap-date">Q4 2024</div>
+                <div class="roadmap-content">
+                    <h3>ECLIPTIC Core Launch</h3>
+                    <ul>
+                        <li>Pattern recognition system</li>
+                        <li>Basic chain analysis</li>
+                        <li>Market tracking</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-date">Q1 2025</div>
+                <div class="roadmap-content">
+                    <h3>Quantum Integration</h3>
+                    <ul>
+                        <li>Advanced ECLIPTIC processing</li>
+                        <li>Multi-chain analysis</li>
+                        <li>Enhanced predictions</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-date">Q2 2025</div>
+                <div class="roadmap-content">
+                    <h3>Elite Features</h3>
+                    <ul>
+                        <li>Custom ECLIPTIC signals</li>
+                        <li>Advanced portfolio tracking</li>
+                        <li>Premium indicators</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="hero-content">
+                <h1>ECLIPTIC AI</h1>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Platform</h4>
+                    <a href="#features">Features</a>
+                    <a href="#analytics">Analytics</a>
+                    <a href="#ECLIPTIC">ECLIPTIC Core</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="/docs">Documentation</a>
+                    <a href="/api">API</a>
+                    <a href="/blog">Blog</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <a href="/about">About</a>
+                    <a href="/careers">Careers</a>
+                    <a href="/contact">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ECLIPTIC AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

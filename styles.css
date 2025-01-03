@@ -1,0 +1,232 @@
+/* Core Variables */
+
+:root {
+    --neon-green: #ff00d4;
+    --deep-green: #0B3F0C;
+    --matrix-green: #ffffff;
+    --cyber-black: #000000;
+    --grid-lines: #ffffff;
+    --terminal-green: #eeff00;
+    /* Gradients */
+    --cyber-gradient: linear-gradient( 180deg, #ff00d4 0%, #ff00d4 100%);
+    /* Shadows */
+    --neon-glow: 0 0 10px #ff00d4, 0 0 20px #ff00d4, 0 0 30px #ff00d4;
+}
+
+/* Base Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cyber-black);
+    color: var(--neon-green);
+    font-family: 'Inter', monospace;
+    position: relative;
+}
+
+/* Cyber Grid Background */
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px) 0 0 / 50px 50px, linear-gradient(0deg, var(--grid-lines) 1px, transparent 1px) 0 0 / 50px 50px;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* Navigation */
+
+.nav-container {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 15, 10, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+    border-bottom: 1px solid var(--neon-green);
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--terminal-green);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--neon-green);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Hero Section */
+
+.hero-section {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 8rem 4rem;
+    position: relative;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-section h1 {
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 2rem;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero-section h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100px;
+    height: 4px;
+    background: var(--neon-green);
+    box-shadow: var(--neon-glow);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--terminal-green);
+    margin-bottom: 2rem;
+    font-family: monospace;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.stat-item {
+    background: rgba(57, 255, 20, 0.05);
+    padding: 2rem;
+    border: 1px solid var(--neon-green);
+    position: relative;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cyber-gradient);
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--neon-green);
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--terminal-green);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Continue with additional sections... */
+
+.connect-ECLIPTIC {
+    background: transparent;
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.connect-ECLIPTIC .external-link {
+    stroke: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.connect-ECLIPTIC:hover .external-link {
+    transform: translate(2px, -2px);
+}
+
+.connect-ECLIPTIC:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 90, 255, 0.3);
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+}
